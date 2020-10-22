@@ -1,0 +1,18 @@
+{
+    "logo": "/icon_gear_black.png",
+    "title": "J and M Transmission",
+    "paths": [
+        {
+            "name": "Home",
+            "url": "/"
+        },
+        {
+            "name": "Contact",
+            "url": "/contact"
+        },
+        {
+            "name": "About",
+            "url": "/about"
+        }
+    ]
+}
