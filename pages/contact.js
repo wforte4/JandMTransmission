@@ -183,6 +183,11 @@ function Contact () {
             font: 18px 'Roboto';
             color: ${Theme.colors.coral};
           }
+          h2 {
+            float: left;
+            margin: 40px 40px;
+            font: 36px 'Montserrat';
+          }
           button {
             float: right;
             padding: 15px 20px;
@@ -244,13 +249,6 @@ function Contact () {
             margin: 0;
             width: 100%;
           }
-          h2 {
-            float: left;
-            display: block;
-            padding: 20px;
-            margin-left: 40px;
-            font: 40px 'Montserrat';
-          }
 
 /* Mobile exported version of the contact page to better format the view-port */
           @media only screen and (max-device-width: 480px) {
@@ -262,10 +260,14 @@ function Contact () {
             input {
               width: 80%;
               float: left;
+              margin-top: 20px;
               background: rgba(150,150,150,.1);
             }
+            label {
+              padding: 20px 0;
+            }
             textarea {
-              width: 90%;
+              width: 80%;
               float: left;
               background: rgba(150,150,150,.1);
             }

@@ -40,6 +40,20 @@ export function LoadingScreen({loader}) {
 }
 
 const Navigation = ({title, links, logo, currentpath, hideNav, user, permission}) => {
+    const [show, setShow] = useState(false)
+
+    useEffect(() => {
+        if(show == true) setShow(false)
+    }, [currentpath])
+
+    const toggleShow = e => {
+        e.persist();
+        if(show == false) {
+            setShow(true)
+        } else {
+            setShow(false)
+        }
+    }
     return (
         <div id='nav'>
             <img className='logo' src={logo} />
@@ -49,6 +63,7 @@ const Navigation = ({title, links, logo, currentpath, hideNav, user, permission}
                     return <Link key={i} href={link.url}><li title={link.url}>{link.name}</li></Link>
                 })}
             </ul>
+            <img onClick={toggleShow} className='ham' src='/ham.png'/>
             <style jsx>{`
                 #nav {
                     position: fixed;
@@ -61,58 +76,14 @@ const Navigation = ({title, links, logo, currentpath, hideNav, user, permission}
                     box-shadow: 0 0 2px rgba(23, 23, 23, .8);
                     display: ${hideNav == false ? 'block': 'none'};
                 }
+                .ham {
+                    display: none;
+                }
                 .logo {
                     float: left;
                     width: 60px;
                     height: 60px;
                     padding: 10px;
-                }
-                .username {
-                    float: right;
-                    margin-right: 10px;
-                    min-height: 78px;
-                    min-width: 250px;
-                    cursor: pointer;
-                }
-                .username:hover {
-                    border-bottom: 2px solid ${theme.colors.coral};
-                }
-                .username h2 {
-                    float: left;
-                    font: 16px ${theme.fonts.subheader};
-                    margin: 20px 0;
-                    margin-top: 26px;
-                    width: 100%;
-                    text-align: center;
-                    z-index: 2;
-                }
-                .dropdown {
-                    float: left;
-                    background: white;
-                    z-index: 1;
-                    height: .01px;
-                    opacity: 0;
-                    transition: all .6s ease;
-                    width: 100%;
-                    box-shadow: ${theme.colors.shadowlight};
-                }
-                .dropdown ul li {
-                    float: left;
-                    width: 100%;
-                    padding: 10px 0;
-                    font: 14px ${theme.fonts.subheader};
-                    text-align: center;
-                    list-style: none;
-                    transition: all .3s ease;
-                }
-                .dropdown ul li:hover {
-                    background: ${theme.colors.platinum};
-                }
-                .dropdown ul {
-                    float: left;
-                    width: 100%;
-                    margin: 0;
-                    padding: 0;
                 }
                 .username:hover .dropdown {
                     height: 100px;
@@ -149,6 +120,38 @@ const Navigation = ({title, links, logo, currentpath, hideNav, user, permission}
                 }
                 .barlink li[title="${currentpath}"] {
                     border-top: 2px solid ${theme.colors.coral};
+                }
+                @media only screen and (max-device-width: 480px) {
+                    .logo {
+                        width: 30px;
+                        height: 30px;
+                        padding: 25px 10px;
+                    }
+                    .ham {
+                        position: fixed;
+                        top: 0;
+                        right: 0;
+                        padding: 20px;
+                        display: block;
+                        width: 30px;
+                        height: auto;
+                        cursor: pointer;
+                    }
+                    h1 {
+                        font: 20px ${theme.fonts.title};
+                        padding: 25px 5px;
+                    }
+                    .barlink {
+                        height: auto;
+                        width: 100%;
+                        background: white;
+                        transform: translateX(${show ? 0: '100%'});
+                        transition: all .4s ease-in-out;
+                    }
+                    .barlink li {
+                        width: 80%;
+                        padding: 10px 2px;
+                    }
                 }
             `}</style>
         </div>

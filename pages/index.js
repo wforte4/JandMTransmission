@@ -14,15 +14,15 @@ export default function Index() {
       </div>
       <div id="aboutcomp">
         <div className='left'>
-          <h1>About Our Shop</h1>
-          <p>Ready to get your transmission fixed? You have come to right place, down at J and M transmissions we treat you like family because we know how important it is to get your car back on the road, you can click the link below to contact us to learn about pricing and more of our services!</p>
+          <h1 className='fromLeft'>About Our Shop</h1>
+          <p><br/>Ready to get your transmission fixed? You have come to right place, down at J and M transmissions we treat you like family because we know how important it is to get your car back on the road, you can click the link below to contact us to learn about pricing and more of our services!</p>
           <Link href='/contact'><h3 className='button'>Contact us</h3></Link>
         </div>
-        <img src="/family.jpeg" />
+        <div className='right'><img src="/family.jpeg" /></div>
       </div>
       <div id="locationcontainer">
         <div id="getintouch">
-          <h1>Find Our Shop</h1>
+          <h1 className='fromLeft'>Find Our Shop</h1>
           <ul>
             <li><img src='/icon_home.png'/> 1076 Pleasant St, Attleboro, MA, 02703</li>
             <li><img src='/icon_phone.png'/> <a href="tel:508-222-1406" className="pagelink">1-(508)-222-1406</a></li>
@@ -35,7 +35,6 @@ export default function Index() {
         <a href="https://www.google.com/maps/place/J+%26+M+Transmissions/@41.9545388,-71.2467436,17z/data=!3m1!4b1!4m7!3m6!1s0x0:0x63dc839649eda577!8m2!3d41.9545388!4d-71.2445549!9m1!1b1"><img src="/reviews.png" /></a>
       </div>
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
         #wrapper {
           float: left;
           width: 100%;
@@ -45,37 +44,43 @@ export default function Index() {
           padding: 0;
         }
         .left {
-          width: 60%;
+          width: 50%;
           float: left;
+          padding: 0 5%;
         }
         #aboutcomp {
           float: left;
-          width: 94%;
-          padding: 0 3%;
+          width: 100%;
+          padding: 40px 0%;
           margin-top: 40px;
           margin-bottom: 60px;
         }
+        .right {
+          float: left;
+          width: 40%;
+          position: relative;
+        }
         #aboutcomp img {
-          float: right;
+          float: left;
           width: 320px;
           height: 320px;
-          margin-top: 30px;
-          margin-right: 40px;
+          margin-left: 50%;
+          transform: translateX(-50%);
           box-shadow: 0 0 10px rgba(20,20,20,.4);
         }
         .left p {
           float: left;
-          width: 98%;
-          font: 18px arial;
-          margin: 25px;
-          padding: 10px 1%;
+          width: 90%;
+          font: 18px 'Roboto';
+          margin-bottom: 30px;
+          padding: 10px 5%;
         }
         .left .button {
           float: left;
           margin: 0;
           cursor: pointer;
           padding: 10px;
-          margin: 0 20px;
+          margin: 20px 5%;
           background: ${Theme.colors.coral};
           color: white;
           font: 16px 'Roboto';
@@ -85,12 +90,11 @@ export default function Index() {
         }
         .left h1 {
           float: left;
-          padding: 20px 10px;
-          font: 40px 'Rubik';
+          padding: 10px 0;
+          font: 40px 'Montserrat';
           margin: 0;
           margin-top: 10px;
-          width: 100%;
-          border: none;
+          margin-left: 5%;
         }
         #reviews {
           float: left;
@@ -121,11 +125,9 @@ export default function Index() {
         #getintouch h1 {
           float: left;
           padding: 20px 10px;
-          font: 40px 'Rubik';
+          font: 40px 'Montserrat';
           margin: 0;
           margin-top: 10px;
-          width: 100%;
-          border: none;
         }
         #getintouch ul {
           float: left;
@@ -171,27 +173,43 @@ export default function Index() {
           margin-top: -${scroll.scrollY / 4}px;
         }
 
+        h1 { display:inline-block; }
+        h1:after {
+          display:block;
+          content: '';
+          border-bottom: solid 2px ${Theme.colors.coral};  
+          transform: scaleX(0);  
+          transition: transform 250ms ease-in-out;
+        }
+        h1.fromLeft:after{ transform-origin: 100% 50%; }
+        h1.fromRight:after{  transform-origin:   0% 50%; }
+        h1.fromLeft:hover:after{ transform: scaleX(1); transform-origin:   0% 50%; }
+        h1.fromRight:hover:after{ transform: scaleX(1); transform-origin: 100% 50%; }
+
 /* Mobile Styling for the index page (Only Execute if mobile-device) */
         @media only screen and (max-device-width: 480px) {
-          p {
-            width: 80%;
-            padding: 10%;
-            margin: 0;
-          }
-          img {
-            height: 100%;
-            width: auto;
-          }
           #aboutcomp img {
             float: left;
             width: 80%;
             height: auto;
-            margin: 10%;
-            margin-top: 30px;
           }
-          h1 {
-            width: 80%;
-            padding: 10%;
+          #aboutcomp {
+            padding: 0;
+          }
+          #banner {
+            height: 250px;
+          }
+          #banner img {
+            width: auto;
+            height: 110%;
+            transform: scale(1.4,1.4);
+          }
+          .left {
+            width: 100%;
+            padding: 40px 0;
+          }
+          .right {
+            width: 100%;
           }
           iframe {
             width: 100%;
@@ -205,6 +223,9 @@ export default function Index() {
             position: relative;
             width: 90%;
             padding: 5%;
+          }
+          #getintouch {
+            width: 100%;
           }
         }
         `}</style>
