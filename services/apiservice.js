@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 export async function submitContact(name, message, email, cellphone) {
     // Request data to post to createprofile route on rest api
-    fetch('http://localhost:3600/contact', {
+    const newfetch = await fetch('http://localhost:3600/contact', {
         method: 'POST',
         headers: {
             "Content-type": "application/json"
@@ -16,13 +16,16 @@ export async function submitContact(name, message, email, cellphone) {
             "email": email
         })
     })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log('Request succeeded with JSON response', data);
+    .then(function(res) {
+        return res.status
     })
     .catch(function(error) {
         console.log('Request failed', error);
     });
+
+    if(newfetch) {
+        return newfetch
+    } else {
+        return 404
+    }
 }

@@ -12,6 +12,7 @@ function Contact () {
     cellphone: "",
   }
   const [inputs, setInputs] = useState(initVals);
+  const [status, setStatus] = useState('form')
 
   const handleInputChange = (e) => {
     const target = e.target;
@@ -25,8 +26,16 @@ function Contact () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus('loading')
     const submitForm = await submitContact(inputs.fullname, inputs.message, inputs.email, inputs.cellphone)
-    if(submitForm) console.log(submitForm)
+    if(submitForm) {
+      console.log(submitForm)
+      if(submitForm == 200) {
+        setStatus('success')
+      } else {
+        setStatus('failed')
+      }
+    }
   }
 
     return (
@@ -36,7 +45,7 @@ function Contact () {
         </div>
         <h2>Contact Us</h2>
         <div id="contactwrapper">
-          <form onSubmit={handleSubmit} name="confirmed" value="submit">
+          <form onSubmit={status == 'form' ? handleSubmit: null} name="confirmed" value="submit">
             <label>Full Name
               <input
                 name="fullname"
@@ -74,6 +83,15 @@ function Contact () {
             </label>
             <button type="submit" name="confirmed" value="submit">Submit</button>
           </form>
+          <div className='loadiv'>
+            <img src='/loading_a.gif' />
+          </div>
+          <div className='success'>
+            <p>Your Message was Sent! Thank you, we will get back to you as soon as possible via email or phone!</p>
+          </div>
+          <div className='failed'>
+            <p>Something went wrong, please refresh and try again.</p>
+          </div>
         </div>
         <style jsx>{`
           body {
@@ -89,7 +107,7 @@ function Contact () {
           #contactwrapper {
             float: left;
             width: 80%;
-            padding: 10%;
+            padding: 5% 10%;
             padding-top: 0;
           }
           .submit {
@@ -100,10 +118,70 @@ function Contact () {
           }
           form {
             float: left;
-            width: 80%;
-            padding: 10%;
+            width: 90%;
+            padding: 5%;
             padding-top: 5%;
+            display: ${status == 'form' ? 'block': 'none'};
             box-shadow: 0 0 4px rgba(200,200,200,.4);
+          }
+          .loadiv {
+            float: left;
+            width: 90%;
+            height: 300px;
+            position: relative;
+            padding: 5%;
+            padding-top: 5%;
+            display: ${status == 'loading' ? 'block': 'none'};
+            box-shadow: 0 0 4px rgba(200,200,200,.4);
+          }
+          .loadiv img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+          }
+          .success {
+            float: left;
+            width: 90%;
+            height: 300px;
+            position: relative;
+            padding: 5%;
+            padding-top: 5%;
+            display: ${status == 'success' ? 'block': 'none'};
+            box-shadow: 0 0 4px rgba(200,200,200,.4);
+          }
+          .success p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: auto;
+            text-align: center;
+            font: 18px 'Roboto';
+          }
+          .failed {
+            float: left;
+            width: 90%;
+            height: 300px;
+            position: relative;
+            padding: 5%;
+            padding-top: 5%;
+            display: ${status == 'failed' ? 'block': 'none'};
+            box-shadow: 0 0 4px rgba(200,200,200,.4);
+          }
+          .failed p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 50%;
+            height: auto;
+            font: 18px 'Roboto';
+            color: ${Theme.colors.coral};
           }
           button {
             float: right;
