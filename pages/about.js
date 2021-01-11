@@ -3,22 +3,15 @@ import { useWindowSize } from '../components/hooks';
 
 function About() {
 
-  const initialValues = {
-    trans: "Transmission",
-    auto: "Auto Repair"
-  }
-
-  const newwindow = useWindowSize()
 
 
   return (
     <div className="body">
       <img className='bgimg' src='/background_about.jpg'/>
       <div id="servicewrapper">
+        <h3>Services we offer</h3>
         <ul id="services">
-          <li id="title">Services We Offer</li>
-          <li>{initialValues.trans}</li>
-          <li>{initialValues.auto}</li>
+          <li>Transmission repair</li>
         </ul>
       </div>
       <style jsx>{`
@@ -27,7 +20,7 @@ function About() {
           width: 100%;
           position: relative;
           overflow: hidden;
-          height: 600px;
+          height: 800px;
         }
         .bgimg {
           position: absolute;
@@ -44,23 +37,27 @@ function About() {
           transform: translate(-50%, -50%);
           z-index: 900;
           width: 80%;
-          height: 300px;
-          background: rgba(255,255,255,.7);
+          padding: 10px 5%;
+          border-radius: 8px;
+          min-height: 400px;
+          height: auto;
+          background: rgba(255,255,255,.6);
+          backdrop-filter: blur(12px);
         }
         #services {
           float: left;
-          width: 80%;
-          padding: 10%;
+          width: 90%;
+          padding: 20px 5%;
+        }
+        #servicewrapper h3 {
+          float: left;
+          font: 38px 'Montserrat';
         }
         #services li {
           float: left;
           width: 100%;
-          font: 18px 'Mukta';
-        }
-        #services #title {
-          font: 30px 'Mukta';
-          margin-bottom: 10px;
-          margin-left: -10px;
+          font: 18px 'Roboto';
+          list-style: none;
         }
         `}</style>
     </div>

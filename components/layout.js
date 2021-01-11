@@ -210,8 +210,11 @@ function Layout({children, links, title, path, logo}) {
                 {children}
             </div>
             <div id="footer">
+                <h2 className='foottitle'>J and M Transmission</h2>
                 <ul>
-
+                    {links && links.map((link, i) => {
+                        return <Link key={i} href={link.url}><li title={link.url}>{link.name}</li></Link>
+                    })}
                 </ul>
                 <div id="copyw">
                     <h2>© CopyRight 2020 J and M Transmission</h2>
@@ -228,9 +231,31 @@ function Layout({children, links, title, path, logo}) {
                     float: left;
                     position: relative;
                     z-index: 2;
-                    width: 100%;
+                    width: 90%;
+                    padding: 10px 5%;
                     min-height: 500px;
                     background: ${theme.colors.onxy};
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    align-content: center;
+                }
+                .foottitle {
+                    position: absolute;
+                    top: 10px;
+                    left: 40px;
+                    color: white;
+                    font: 26px 'Montserrat';
+                }
+                #footer ul {
+                    float: left;
+                    color: white; 
+                }
+                #footer ul li {
+                    list-style: none;
+                    font: 16px 'Roboto';
+                    padding: 4px 0;
+                    cursor: pointer;
                 }
                 #copyw {
                     position: absolute;
